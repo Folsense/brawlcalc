@@ -1,0 +1,503 @@
+@font-face {
+    font-family: 'alwaystogether';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/always-together.ttf') format('truetype'),
+         url('../fonts/always-together.woff') format('woff'),
+         url('../fonts/always-together.woff') format('woff2');
+}
+
+@font-face {
+  font-family: 'baloo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/baloo-v4-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Baloo Regular'), local('Baloo-Regular'),
+       url('../fonts/baloo-v4-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/baloo-v4-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/baloo-v4-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/baloo-v4-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/baloo-v4-latin-regular.svg#Baloo') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'nougat';
+    font-style: normal;
+    src: url("/fonts/bsfont.woff") format('woff'),
+         url("/fonts/bsfont.woff2") format('woff2'),
+         url("/fonts/nougatwebfont.ttf") format('truetype');
+}
+
+* {
+    font-family: alwaystogether;
+}
+
+/*select {
+    font-family: 'Times New Roman', Times, serif !important;
+    width: auto;
+}*/
+
+.loginbox {
+    font-size: 25px;
+    text-align: center;
+    vertical-align: text-bottom;
+}
+
+body {
+    background: rgb(140, 198, 255);
+    /*background-image: url("../cgi-bin/groupback.png");
+    background-repeat: repeat;
+    background-size: 10%;*/
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+header {
+    text-align: center;
+    width: 100%;
+    height: 64px;
+}
+
+.headdiv {
+    background-color: rgb(125, 125, 125, 0.9);
+    height: 64px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+header * {
+    display: inline-block;
+}
+
+header img {
+    height: 64px;
+}
+
+header p {
+    font-size: 50px;
+    vertical-align: text-bottom;
+    margin: 0;
+    height: 64px;
+    line-height: 64px;
+}
+
+.loginback {
+    background-color: #c6ffaa;
+    width: 400px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    line-height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+#loginschlop {
+    width: fit-content;           /* Safari/WebKit uses a non-standard name */   width: -moz-max-content;    /* Firefox/Gecko */   ;
+}
+
+.holds-contract {
+    background-color: #c6ffaa;
+    width: 350px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+    color: black;
+    vertical-align: top;
+}
+
+.contractType {
+    vertical-align: top;
+    margin: 0 !important;
+    font-size: 30px;
+    height: 100px;
+}
+
+.contractType p {
+    vertical-align: middle;
+    margin: auto;
+    height: 100px;
+    line-height: 100px;
+}
+
+.hidden {
+    color: red;
+}
+
+.contractName {
+    margin: 15px auto;
+    font-size: 30px;
+}
+
+.holds-contract img {
+    height: 100px;
+    margin-right: -20px;
+}
+
+#contract-holder {
+    margin: 0 auto;
+    width: 85%;
+    height: 500px;
+}
+
+.loginback .textbox {
+    width: 300px;
+    height: 30px;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+}
+
+h3 {
+    margin: 0;
+    font-size: 35px;
+    font-style: bold;
+}
+
+.subbutton {
+    width: auto;
+    height: 30px;
+    padding-top: 5px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.center-horizontal {
+    margin: 0 auto;
+}
+
+#contract-profile {
+    width: 95%;
+    border-radius: 20px;
+    margin: 0 auto;
+    background-color: #c6ffaa;
+    padding-bottom: 10px;
+}
+
+#contract-profile .eggimg {
+    height: 200px;
+    padding: 10px;
+    border: 2px solid rgba(125, 125, 125, .5);
+    border-radius: 10px;
+    margin: 30px;
+    background-color: white;
+    display: inline-block;
+}
+
+#contract-profile h1 {
+    font-size: 50px;
+    margin: auto;
+    display: inline-block;
+    vertical-align: middle;
+    height: 200px;
+    line-height: 200px;
+}
+
+#contract-profile .holds-text {
+    height: 200px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#contract-profile .center-plzcssbad {
+    margin: 0 auto;
+    width: fit-content;           /* Safari/WebKit uses a non-standard name */   width: -moz-max-content;    /* Firefox/Gecko */   ;
+}
+
+#contract-profile h2 {
+    font-size: 40px;
+    font-weight: normal;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+#contract-profile h4 {
+    font-size: 30px;
+    margin: auto;
+    font-weight: normal;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+
+#login-message {
+    margin: 0 auto;
+    color: red;
+    font-size: 25px;
+    width: fit-content;           /* Safari/WebKit uses a non-standard name */   width: -moz-max-content;    /* Firefox/Gecko */   ;
+}
+
+.holds-text p, .contractNamey {
+    display: inline-block;
+}
+
+.holds-text p {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+#contractHiddenDiv {
+    display: block;
+    font-size: 25px;
+    size: 30px;
+}
+
+#contractHiddenDiv input {
+    zoom: 1.5;
+}
+
+.textbox-center {
+    margin-top: 85px;
+    height: 30px;
+    width: 200px;
+    font-size: 25px !important;
+    line-height: 30px;
+    vertical-align: text-bottom;
+    text-align: center;
+}
+
+#descriptionText {
+    margin: 0 auto;
+    width: 500px;
+    height: 250px;
+    font-size: 25px;
+}
+
+.icantcssandthisisntcentered {
+    width: fit-content;           /* Safari/WebKit uses a non-standard name */   width: -moz-max-content;    /* Firefox/Gecko */   ;
+    margin-bottom: 15px !important;
+}
+
+.contractthing {
+display: inline-block;
+}
+
+.contractthing select {
+    margin: 0 auto 20px auto;
+    display: block;
+    width: 150px;
+    font-size: 25px;
+    padding-top:4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
+    border: 0px;
+}
+
+#contract-profile .eggimg2 {
+    height: 200px;
+    padding: 10px;
+    border: 2px solid rgba(125, 125, 125, .5);
+    border-radius: 10px;
+    margin: 30px 30px 10px 30px;
+    background-color: white;
+    display: inline-block;
+}
+
+#make-contract {
+    width: 100%;
+    height: 50px;
+    font-size: 45px;
+    padding-top: 5px;
+    vertical-align: text-bottom;
+    margin: 0 auto;
+}
+
+.headlink {
+    background-color: rgb(0, 255, 0, 0.75);
+    width: 50%;
+    display: inline-block;
+    height: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 25px !important;
+    border: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    white-space: nowrap;
+}
+
+.headlink p {
+    line-height: 35px;
+    margin-top: 0;
+    height: 28px;
+    border: 2px solid blue;
+}
+
+.toggled
+{
+    border-color: transparent;
+    box-shadow: 0px 0px 0px 10px green;
+}
+
+.untoggled
+{
+    border-color: transparent;
+    box-shadow: 0px 0px 0px 5px red;
+}
+
+.tablecont
+{
+    float: left;
+    border-radius: 10px;
+    margin: 15px 15px 15px 15px;
+    width: 180px;
+    height: 150px;
+}
+
+.heroimg
+{
+    border-radius: 10px;
+    position: relative;
+    z-index:2;
+    width: 180px;
+    height: 150px;
+}
+
+.backimg
+{
+    z-index: 1;
+    border-radius: 10px;
+    position: absolute;
+    width: 180px;
+    height: 150px;
+    margin: 0 -180px;
+}
+
+select option {
+    line-height: 40px !important;
+    padding-top: 5px !important;
+}
+
+#wantedBrawlers {
+    width: 85%;
+    margin: 0 auto;
+}
+
+#filterdiv {
+    background-color: rgb(125, 125, 125, 0.9);
+    height: 64px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.filterdivy {
+    display: inline-block;
+    line-height: 64px;
+    height: 64px;
+    font-size: 40px;
+    width: 33%;
+}
+
+.ughanotherdiv {
+    width: fit-content;           /* Safari/WebKit uses a non-standard name */   width: -moz-max-content;    /* Firefox/Gecko */   ;
+    margin: 0 auto;
+    float: none !important;
+}
+
+.filterdivy p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 6px;
+}
+
+.filterdivy select, .filterdivy input, .filterdivy button, select {
+    width: 100px;
+    margin-top: 17px;
+    margin-bottom: 17px;
+    line-height: normal;
+    font-size: 25px;
+    font-family: nougat !important;
+}
+
+.filterdivy * {
+    float: left;
+}
+
+.selectboxesaredum {
+    /*margin: auto 0;
+    height: fit-content;*/
+}
+
+#credithead {
+    opacity: 0.75;
+    font-size: 20px;
+    z-index: 9999;
+    padding-top: 15px;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    background: #cccccc;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+    transition-duration: 1s;
+}
+
+#credithead:hover {
+    opacity: 1;
+}
+
+/*https://html-online.com/articles/cookie-consent-warning-strap-website/*/
+/*Cookie Consent Begin*/
+#cookieConsent {
+    background-color: rgba(20,20,20,0.8);
+    min-height: 26px;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 26px;
+    padding: 8px 0 8px 30px;
+    font-family: "Trebuchet MS",Helvetica,sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+#cookieConsent a {
+    color: #4B8EE7;
+    text-decoration: none;
+}
+#closeCookieConsent {
+    float: right;
+    display: inline-block;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin: -15px 0 0 0;
+    font-weight: bold;
+}
+#closeCookieConsent:hover {
+    color: #FFF;
+}
+#cookieConsent a.cookieConsentOK {
+    background-color: #F1D600;
+    color: #000;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 20px;
+    cursor: pointer;
+    float: right;
+    margin: 0 60px 0 10px;
+}
+#cookieConsent a.cookieConsentOK:hover {
+    background-color: #E0C91F;
+}
+/*Cookie Consent End*/
+
+.centergif {
+    display: block;
+    margin: 0 auto;
+}

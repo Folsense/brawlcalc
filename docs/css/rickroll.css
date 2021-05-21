@@ -1,0 +1,50 @@
+#textHere {
+    font-size: 10px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+body {
+    background: #eeeeee;
+    margin: 0;
+}
+
+button {
+    margin: 10px auto;
+    display: block;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+}
+
+.unsurprise {
+    display: none;
+}
+
+#lazyaudio, #rickvideo {
+    display: none;
+}
+
+h1 {
+    font-size: 25px;
+}
+
+header {
+    text-align: center;
+    background: #cccccc;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+p {
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    font-size: 20px;
+}

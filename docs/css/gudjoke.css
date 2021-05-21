@@ -1,0 +1,44 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    background: #eeeeee;
+    margin: 0;
+}
+
+p {
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.surprise {
+    display: none;
+}
+
+button {
+    margin: 10px auto;
+    display: block;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+}
+
+#lazyaudio, #rickvideo {
+    display: none;
+}
+
+h1 {
+    font-size: 25px;
+}
+
+header {
+    text-align: center;
+    background: #cccccc;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}

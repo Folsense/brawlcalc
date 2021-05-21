@@ -1,0 +1,790 @@
+@font-face {
+    font-family: 'nougat';
+    font-style: normal;
+    src: url("../fonts/bsfont.woff") format('woff'),
+         url("../fonts/bsfont.woff2") format('woff2'),
+         url("../fonts/nougatwebfont.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'baloo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/baloo-v4-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Baloo Regular'), local('Baloo-Regular'),
+       url('../fonts/baloo-v4-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/baloo-v4-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/baloo-v4-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/baloo-v4-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/baloo-v4-latin-regular.svg#Baloo') format('svg'); /* Legacy iOS */
+}
+
+*
+{
+    font-family: baloo;
+}
+
+.statinput
+{
+    margin: 20px auto !important;
+}
+
+.iNeedToMoveThisRight
+{
+margin-left:12px;
+}
+
+body
+{
+    margin: 0px 0px 0px 0;
+    width: 100%;
+    height: 100%;
+}
+
+.foot
+{
+    background-color: #876767;
+    height: 50px;
+    text-align: center;
+    display: center;
+    z-index: 9;
+    width: 100%;
+}
+
+#statsback
+{
+background-color: #00b8ed;
+}
+
+#statsbackbox
+{
+background-color: #00c7ff;
+overflow: auto;
+}
+
+#resultdisclaim
+{
+margin-bottom: 50px;
+}
+
+#texthold
+{
+margin: auto auto;
+display: table;
+height: 100%;
+}
+
+#disclaim
+{
+    display: table-cell;
+    height: 100%;
+    width: 500px;
+    margin: auto auto;
+    text-align: center;
+    vertical-align: middle;
+    font: arial;
+}
+
+h2
+{
+    font-size: 25px;
+}
+
+button
+{
+    background-color: #ffffff;
+}
+
+div
+{
+    margin: 0;    
+}
+
+button
+{
+    cursor: pointer;
+}
+
+#webtitle
+{
+    margin: 0 auto !important;
+    height: 200px;
+    width:100%;
+    line-height: 200px;
+    text-align: center;
+    font-family: nougat;
+    font-size: 80px !important;
+    font-weight: bold;
+}
+
+#homecont
+{
+    margin: 0 0 0;
+    position: relative;
+    height: 400px;
+    width: 840px;
+    background-image: url("../cgi-bin/tarafortune.png"); 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    background-size: auto 100%; 
+    overflow: hidden;
+}
+
+#homehead
+{
+    margin: 0px 0px 0px 0px;
+    height: 200px;
+    line-height: 200px;
+    background-position: center;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    background-image: url('../cgi-bin/background_home.jpg');
+    background-size: 100%;
+    font-family: nougat;
+    font-size: 30px;
+}
+
+#selectcont
+{
+width: 100%;
+margin: 0 auto;
+background-color: #00b8ed;
+min-width: 800px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.toggbtn
+{
+    background-color: #960000;
+    margin: -3px 0;
+}
+
+.toggbtn:hover
+{
+    cursor: pointer;
+}
+
+#github
+{
+    font-size: 15px !important;
+}
+
+a {
+    font-size: 20px;
+}
+
+#inputs
+{
+    margin: 0 0 20px 0;
+    position: relative;
+    max-width: 940px;
+    display: inline-block;
+}
+
+.toggled
+{
+    border-color: transparent;
+    box-shadow: 0px 0px 0px 10px green;
+}
+
+.untoggled
+{
+    border-color: transparent;
+    box-shadow: 0px 0px 0px 5px red;
+}
+
+.tablecont
+{
+    float: left;
+    border-radius: 10px;
+    margin: 15px 15px 15px 15px;
+    width: 180px;
+    height: 150px;
+}
+
+#brawlers
+{
+    width: 840px;
+    margin: 0 auto;
+    align-self: flex-start;
+}
+
+.heroimg
+{
+    border-radius: 10px;
+    position: relative;
+    z-index:2;
+    width: 180px;
+    height: 150px;
+}
+
+.heroimgtrue
+{
+opacity:0.8;
+border-radius:10px;
+height:100px;
+position:absolute;
+z-index:-2;
+margin-left:-300px;
+}
+
+.classSelect :nth-child(4-n)
+{
+margin-bottom:20px;
+}
+
+.classSelect
+{
+z-index:2;
+float: none;
+display:block;
+width:600px !important;
+margin-bottom:30px !important;
+height:100px;
+}
+
+.classSelectInput
+{
+z-index:2;
+width:auto;
+margin:0 0 5px 0 !important;
+}
+
+.classSelectInput *
+{
+display:inline;
+}
+
+.classSelectInput p
+{
+font-weight: bold;
+font-size: 20px;
+}
+
+.classSelectInput input
+{
+margin-bottom: 10px;
+height: 37px;
+font-size: 30px;
+width: 75px;
+margin-left: 5px;
+}
+
+.slightDown
+{
+padding-top: 10px !important;
+}
+
+.classSelect p
+{
+line-height:100px;
+font-family: baloo;
+margin: 0 0;
+font-size: 50px;
+text-align:center;
+}
+
+.heroimg:hover
+{
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+#brawlers div .classSelect
+{
+    width: 350px;
+    margin: 0 auto 30px auto !important;
+    display: block;
+    height: auto;
+}
+
+#brawlers div .classSelect .input
+{
+    width: 350px;
+    margin: 0 0 10px 0 !important;
+    display: block;
+    height: auto;
+}
+
+#calcbtn
+{
+    width:300px;
+    height: 100px;
+    margin: 0px auto 50px auto;
+    font-size: 30px;
+    border-radius: 20px;
+}
+
+.boxOpen
+{
+    width:220px;
+    height: 50px;
+    margin: 0 20px 0px 20px;
+    font-size: 30px;
+    border-radius: 20px;
+}
+
+#howLink
+{
+    width: 75%;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 15px;
+    margin: 10px auto 10px;
+}
+
+#howLinkLink
+{
+    color:#00358c !important;
+    text-decoration: underline !important;
+}
+
+#explainStuff
+{
+    width: 75%;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 25px !important;
+    margin: 20px auto 10px;
+}
+
+#calcbtn1
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 100px;
+    margin: -50px -150px;
+    font-size: 30px;
+    border-radius: 20px;
+}
+
+#homeinfo
+{
+    width: 840px;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 50px;
+    margin: 10px auto 30px;
+}
+
+#disclaim
+{
+    width: 840px;
+    text-align: center;
+    word-wrap: break-word;
+    color: yellow;
+    font-size: 15px !important;
+}
+
+#github
+{
+    font-size: 15px !important;
+}
+
+#resultdisclaim
+{
+    width: 840px;
+    margin: 0 auto;
+    text-align: center;
+    word-wrap: break-word;
+    color: black;
+    font-size: 15px;
+}
+
+#allstats
+{
+    display: inline-block;
+    margin: 0 0 0 0;
+    width: 100%;
+}
+
+#allstats div
+{
+    width: 100%;
+}
+
+#allstats h1
+{
+    text-align: center;
+}
+
+#allstats button
+{
+    width: 100%;
+    font-size:30px;
+    height: 50px;
+}
+
+#inputs div *
+{
+    display: inline;
+}
+
+#graphDiv
+{
+    width: 750px !important;
+    height: auto;
+    margin-left: auto !important;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+#graphCanvas
+{
+    margin: 0 125px;
+    width: 500px;
+    height: 445px;
+    border: 0px;
+}
+
+#graphChecks
+{
+    height:auto;
+    margin: 20px 20px 0px 20px;
+    font-size:20px;
+}
+
+#graphChecks input
+{
+width:25px;
+height:25px;
+}
+
+.resultTableThing
+{
+margin:0 auto 20px;
+}
+
+table, th, td
+{
+border: 1px solid black;
+font-size: 20px;
+}
+
+#graphChecks div:nth-child(3n)
+{
+    margin-right: 50px;
+}
+
+#graphChecks div:nth-child(-n + 3)
+{
+    margin-top: 0;
+}
+
+#graphChecks input
+{
+margin-top: 10px;
+}
+
+#graphChecks p
+{
+margin-bottom: 10px;
+}
+
+.graphCheck
+{
+float:left;
+width:120px !important;
+margin-left:70px;
+margin-bottom: 40px;
+height: 80px !important;
+text-align: center;
+}
+
+.graphCheck:nth-child(3n - 2)
+{
+margin-left: 105px !important;
+}
+
+#inputs input
+{
+    height: 40px;
+    width: 200px;
+    font-size: 20px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.accordcont
+{
+    background-color: #70a6ff;
+    margin: 0px 0;
+}
+
+.collapse.show
+{
+    padding: 0 0 1px 0;
+}
+
+.statinput
+{
+    font-size:15px;
+    margin: 0 auto !important;
+}
+
+.statinput p
+{
+    display: inline-block;
+    font-size:15px;
+    margin: 0 0 0 0;
+}
+
+.statinputResult
+{
+    font-size:20px;
+    margin: 0 auto !important;
+}
+
+.statinputResult p
+{
+    display: inline-block;
+    font-size:20px;
+    margin: 0 0 0 0;
+}
+
+#simh1
+{
+margin-bottom: 20px !important;
+}
+
+.filler
+{
+    float: left;
+    width: 10%;
+}
+
+.toggtext
+{
+    float: left;
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+html, body {
+    margin:0;
+    padding:0;
+}
+
+.togghead
+{
+    width: 10%;
+    float: right;
+}
+
+.legendaryBack
+{
+    background-color:rgb(255, 255, 127) !important;
+}
+
+.mythicBack
+{
+    background-color:rgb(255, 127, 127) !important;
+}
+
+.epicBack
+{
+    background-color:rgb(190, 127, 190) !important;
+}
+
+.rareBack
+{
+    background-color:rgb(127, 255, 127) !important;
+}
+
+.superrareBack
+{
+    background-color:rgb(127, 127, 255) !important;
+}
+
+.starBack
+{
+    background-color:rgb(190, 190, 190) !important;
+}
+
+.extraBack
+{
+background-color:rgb(255, 127, 255) !important;
+}
+
+.coinBack
+{
+background-color:rgb(255, 255, 255) !important;
+}
+
+#leghelp
+{
+    position: relative;
+    width: 300px;
+}
+
+#leginfo
+{
+    font-size: 15px;
+    background-color: #ffffff;
+    width: 300px;
+    text-align: center;
+    margin: 0 -150px;
+    float: left;
+    border-radius: 5px;
+    left: 50%;
+    position: absolute;
+}
+
+h3
+{
+font-size:15px;
+width:600px;
+margin: 0 auto;
+text-align:center;
+}
+
+.hidden
+{
+    display: none !important;
+}
+
+.lonk {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#tableResults
+{
+margin-top: 20px;
+margin-bottom: 0;
+}
+
+#boxResults
+{
+    border: 1px solid black;
+    border-spacing: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#boxResults th, #boxResults td
+{
+background-color: rgb(255, 255, 255);
+}
+
+#boxLeft
+{
+border: 1px solid black;
+border-spacing: 0;
+margin-top: 20px;
+margin-bottom: 20px;
+background-color: rgb(255, 255, 255);
+}
+
+#extraLeft
+{
+border: 1px solid black;
+border-spacing: 0;
+margin-top: 20px;
+margin-bottom: 20px;
+background-color: rgb(255, 255, 255);
+}
+
+.resultTableThing th
+{
+background-color:rgb(255, 255, 255);
+}
+
+#simTables div
+{
+width: auto;
+display: inline-block;
+vertical-align: top;
+margin-left: auto;
+margin-right: auto;
+}
+
+#simTables
+{
+width: auto;
+height: auto;
+margin: 0 auto;
+}
+
+.boxTableThing
+{
+border: 1px solid black;
+border-collapse:collapse;
+}
+
+.boxTableThing td, th
+{
+padding: 2px;
+}
+
+.resultTableThing th,td
+{
+text-align:center;
+}
+
+.backimg
+{
+    z-index: 1;
+    border-radius: 10px;
+    position: absolute;
+    width: 180px;
+    height: 150px;
+    margin: 0 -180px;
+}
+
+/*https://html-online.com/articles/cookie-consent-warning-strap-website/*/
+/*Cookie Consent Begin*/
+#cookieConsent {
+    background-color: rgba(20,20,20,0.8);
+    min-height: 26px;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 26px;
+    padding: 8px 0 8px 30px;
+    font-family: "Trebuchet MS",Helvetica,sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 9999;
+}
+#cookieConsent a {
+    color: #4B8EE7;
+    text-decoration: none;
+}
+#closeCookieConsent {
+    float: right;
+    display: inline-block;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin: -15px 0 0 0;
+    font-weight: bold;
+}
+#closeCookieConsent:hover {
+    color: #FFF;
+}
+#cookieConsent a.cookieConsentOK {
+    background-color: #F1D600;
+    color: #000;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 20px;
+    cursor: pointer;
+    float: right;
+    margin: 0 60px 0 10px;
+}
+#cookieConsent a.cookieConsentOK:hover {
+    background-color: #E0C91F;
+}
+/*Cookie Consent End*/
