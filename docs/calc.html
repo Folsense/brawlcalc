@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<title>Enter your information!</title>
+<script src = 'js/jquery-3.3.1.min.js'></script>
+</head>
+<body bgcolor = '#676767'>
+<div id = 'homehead' style = "height: 250px !important;">
+<h1 id = 'webtitle'>Brawl Box Calculator</h1>
+<a href = "https://brawlcalc.com/findgroup.php"><div width = 100% height = "50px" style = "background: grey;"><h3 style = "width: 800px; font-size: 20px; height: 50px !important; line-height: 50px;" style = "color: blue;">Want to try out a new, beta team-finding feature on brawlcalc? Click here!</h3></div></a>
+</div>
+<div id = 'selectcont'>
+    <div id = 'brawlers' align = 'center'>
+        <div style = 'font-size: 30px; margin: 25px auto; width: 800px; word-wrap: normal; text-align: center; tabindex="1"'>
+            <b>Step One:</b><br>
+        Select which brawlers you own!
+    </div>
+    </div>
+    <br>
+    <div style = 'font-size: 30px; margin: 25px auto; width: 800px; word-wrap: normal; text-align: center; tabindex="1"'>
+            <b>Step Two:</b><br>
+        Fill in other needed information!
+    </div>
+    <div id = 'inputs'>
+        <div align = 'center' class = 'statinput'>
+            <h2>Legendary Chance:</h2>
+            <br>
+            <input type = 'text' id = 'leggie' placeholder = 'eg. 0.0823'>
+            <h2>%</h2>
+            <br>
+            <a class = 'lonk' id = 'leghelptogg'>What is this?</a>
+            <br>
+            <span id = 'leghelp' class = 'hidden'>
+                <h1 id = 'leginfo'>To find your chance of a legendary, go to your shop and tap on a big or mega box. Instead of buying it, tap on the question mark in the top left corner. That will bring you to a page showing more information about brawl box chances.</h1>
+            </span>
+            </div>
+        <div align = 'center' class = 'statinput'>
+            <h2>Unopened Brawl Boxes:</h2>
+            <br>
+            <input type = 'text' id = 'boxes' placeholder = 'eg. 8, 1 or 0'>
+        </div>
+        <div align = 'center' class = 'statinput'>
+        	<h2>Level 9 Brawlers:</h2>
+            	<br>
+            	<input type = 'text' id = 'stars' placeholder = 'eg. 8, 1 or 0'>
+        </div>
+        <!--<div align = 'center' class = 'statinput'>
+            <h2>Are You Cyn?</h2>
+            <br>
+            <input type="checkbox" name="isCyn" value="cyn" id = "cyn">
+        </div>-->
+        </label>
+        </div>
+        <button id = 'calcbtn' onclick = 'getinfo();'>CALCULATE!</button>
+    </div>
+</div>
+<footer class = 'foot'>
+<div id = 'texthold'>
+<p id = 'disclaim'>
+    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell&#39s Fan Content Policy: www.supercell.com/fan-content-policy.
+</p>
+</div>
+</footer>
+</body>
+<script>
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
+var brawlers = ['shelly', 'nita', 'colt', 'bull', 'jessie', 'brock', 'mike', 'bo', 'primo', 'barley', 'poco', 'rico', 'darryl', 'penny', 'piper', 'pam', 'frank', 'mortis', 'tara', 'spike', 'crow', 'leon'];
+var brawlers2 = [['shelly', 'nita', 'colt', 'bull', 'jessie', 'brock', 'mike', 'bo'], ['primo', 'barley', 'poco'], ['rico', 'darryl', 'penny'], ['piper', 'pam', 'frank'], ['mortis', 'tara'], ['spike', 'crow', 'leon']];
+var backs = ['blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'green', 'green', 'green', 'darkblue', 'darkblue', 'darkblue', 'purple', 'purple', 'purple', 'red', 'red', 'yellow', 'yellow', 'yellow'];
+var add = "";
+add += "<table>"
+var perRow = 3;
+for(i = 8; i < brawlers.length; i ++){
+    add += "<div onclick = \'toggle(this)\' class = 'untoggled tablecont' id = \'" + brawlers[i] + "div\'><div class = 'brawlerimg'><img class = 'heroimg' src = \'cgi-bin/" + brawlers[i] + ".png\'><img class = 'backimg' src = \'cgi-bin/back_" + backs[i] + ".jpg\'></div></div>";
+    }
+add += "</table>"
+$("#brawlers").append(add);
+</script>
+<script>
+    function toggle(e){
+var classList = e.className.split(/\s+/);
+    for (var i = 0; i < classList.length; i++) {
+        if (classList[i] === 'toggled') {
+        $(e).removeClass(classList[i]);
+        $(e).addClass('untoggled');
+        }
+        if (classList[i] === 'untoggled') {
+        $(e).removeClass(classList[i]);
+        $(e).addClass('toggled');
+        }
+}
+}
+
+function imBad(){
+/*var place = document.getElementById("leggie").value;
+for(var i = 0; i < place.length; i ++){
+    if(place[i] === ','){
+        place[i] = '.';
+    }
+}
+document.getElementById("leggie").value = place;*/
+var place = document.getElementById("leggie").value;
+place.replace(/,/g, ".");
+document.getElementById("leggie").value = place;
+};
+
+setInterval(imBad, 1000/60);
+
+function getinfo(){
+    
+    var info = {
+        boxes: 0,
+        chance: 0,
+        needRare: false,
+        needSuperRare: false,
+        needEpic: false,
+        needMythic: false,
+        needLegendary: false,
+        stars: 0,
+        isCyn: false,
+    }
+    var doesHave = [false, false, false, false, false, false, false, false];
+    info.boxes = parseInt(document.getElementById("boxes").value, 10);
+    info.chance = parseFloat(document.getElementById("leggie").value, 10);
+    info.stars = parseFloat(document.getElementById("stars").value, 10);
+    console.log(info.boxes + "   " + info.chance);
+    if(isNaN(info.boxes) || isNaN(info.chance) || isNaN(info.stars) || info.boxes < 0 || info.chance < 0 || info.chance > 1 || info.stars < 0){
+    console.log(true);
+    alert("Whoops! Double-check your inputs!");
+    return;
+    }
+    else{
+        doesHave[0] = true;
+        doesHave[1] = true;
+        doesHave[7] = true;
+    }
+    for(var i = brawlers2[1].length - 1; i >= 0; --i){
+        if($(document.getElementById(brawlers2[1][i] + "div")).hasClass('untoggled')){
+            info.needRare = true;
+            doesHave[2] = true;
+        }
+    }
+    for(var i = brawlers2[2].length - 1; i >= 0; --i){
+        if($(document.getElementById(brawlers2[2][i] + "div")).hasClass('untoggled')){
+            info.needSuperRare = true;
+            doesHave[3] = true;
+        }
+    }
+    for(var i = brawlers2[3].length - 1; i >= 0; --i){
+        if($(document.getElementById(brawlers2[3][i] + "div")).hasClass('untoggled')){
+            info.needEpic = true;
+            doesHave[4] = true;
+        }
+    }
+    for(var i = brawlers2[4].length - 1; i >= 0; --i){
+        if($(document.getElementById(brawlers2[4][i] + "div")).hasClass('untoggled')){
+            info.needMythic = true;
+            doesHave[5] = true;
+        }
+    }
+    for(var i = brawlers2[5].length - 1; i >= 0; --i){
+        if($(document.getElementById(brawlers2[5][i] + "div")).hasClass('untoggled')){
+            info.needLegendary = true;
+            doesHave[6] = true;
+        }
+    }
+    /*if($(document.getElementById("cyn")).prop('checked')){
+info.isCyn = true;
+    }
+    */
+    function has(a){
+    var end = true;
+    for(var i = a.length - 1; i >= 0; --i){
+        if(a[i] === false){
+            end = false;
+        }
+    }
+    return(end);
+}
+    localStorage.setItem('info', JSON.stringify(info));
+    window.location.href = "results.html";
+}
+$(window).click(function(e){
+if(!($('#leghelp').hasClass('hidden'))){
+        $('#leghelp').addClass('hidden');
+    }   
+});
+$('#leghelptogg').click(function() {
+	event.stopPropagation();
+});
+$('#leghelptogg').click(function() {
+    if($('#leghelp').hasClass('hidden')){
+        $('#leghelp').removeClass('hidden');
+    }
+    else{
+        $("#leghelp").addClass('hidden');
+    }
+});
+</script>
+</html> 

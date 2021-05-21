@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=1000">
+<script src = "js/fastclick.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131365207-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131365207-1');
+</script>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<title>Simulate some box openings!</title>
+<script src = 'js/jquery-3.3.1.min.js'></script>
+</head>
+<body bgcolor = '#676767'>
+<div id = 'homehead'>
+<h1 id = 'webtitle'>Brawl Box Calculator</h1>
+</div>
+    <div id = 'statsbackbox' align = 'center'>
+    <h1 id = 'simh1'>Simulate some box openings!</h1>
+	<button id = "openOne" class = "boxOpen" onclick = "openBox(1)">1 box</button>
+	<button id = "openTen" class = "boxOpen" onclick = "openBox(10)">10 boxes</button>
+	<button id = "openHundred" class = "boxOpen" onclick = "openBox(100)">100 boxes</button>
+	<br>
+	<div id = "simTables">
+	<div>
+	<table id = "boxLeft" class = "boxTableThing">
+        </table>
+        </div>
+        <div>
+        <table id = "extraLeft" class = "boxTableThing">
+        <tr><th>Category</th><th>Received</th></tr>
+        <tr><td class = "extraBack">Gems</td><td>0</td></tr>
+        <tr><td class = "extraBack">Tickets</td><td>0</td></tr>
+        <tr><td class = "extraBack">Key Doublers</td><td>0</td></tr>
+        </table>
+        </div>
+        </div>
+	<table id = "boxResults" class = "boxTableThing">
+        </table>
+    </div>
+<footer class = 'foot'>
+<div id = 'texthold'>
+<p id = 'disclaim'>
+    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell&#39s Fan Content Policy: www.supercell.com/fan-content-policy.
+</p>
+</div>
+</footer>
+</body>
+<script>
+var attachFastClick = Origami.fastclick;
+attachFastClick(document.body);
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
+var info = JSON.parse(localStorage.getItem('info'));
+
+var pool = [];
+
+var chances = {
+    superrare: 0.012096,
+    epic: 0.005472,
+    mythic: 0.002496,
+    legendary: info.chance / 100,
+    star: 0.01,
+    gold: .942,
+    rare: 0,
+}
+
+var altchances = {
+    superrare: 0.012096,
+    epic: 0.005472,
+    mythic: 0.002496,
+    legendary: info.chance / 100,
+    star: 0.01,
+    gold: .942,
+    rare: 0,
+}
+
+var counts = {
+    legendary: info.legendaryCount,
+    mythic: info.mythicCount,
+    epic: info.epicCount,
+    superrare: info.superrareCount,
+    rare: info.rareCount,
+    star: info.stars
+}
+
+chances.rare = 1 - chances.superrare - chances.epic - chances.legendary - chances.mythic - chances.star - chances.gold;
+
+function getChances(){
+var has  = 0;
+var hasnt = 0;
+hasnt += chances.gold;
+
+function putRight(a, b){
+if(a){hasnt += b;}else{has += b;}
+};
+
+putRight(counts.legendary > 0, chances.legendary);
+putRight(counts.mythic > 0, chances.mythic);
+putRight(counts.epic > 0, chances.epic);
+putRight(counts.superrare > 0, chances.superrare);
+putRight(counts.rare > 0, chances.rare);
+putRight(counts.star > 0, chances.star);
+
+function toReal(a, b){
+if(a){
+return(b/hasnt);
+}
+else{return(0);}
+}
+
+altchances.legendary = toReal(counts.legendary > 0, chances.legendary);
+altchances.mythic = toReal(counts.mythic > 0, chances.mythic);
+altchances.epic = toReal(counts.epic > 0, chances.epic);
+altchances.superrare = toReal(counts.superrare > 0, chances.superrare);
+altchances.star = toReal(counts.star > 0, chances.star);
+altchances.rare = toReal(counts.rare > 0, chances.rare);
+altchances.gold = toReal(true, chances.gold);
+
+pool = [];
+
+var allPulls = [altchances.gold, altchances.rare, altchances.superrare, altchances.star, altchances.epic, altchances.mythic, altchances.legendary];
+
+function getOddsUpTo(a){
+    var end = 0;
+    for(var i = 0; i <= a; i ++){
+        end += allPulls[i];
+    }
+    return(end);
+}
+
+for(var i = 0; i < allPulls.length; i ++){
+    pool.push([getOddsUpTo(i - 1), getOddsUpTo(i), i]);
+}
+}
+
+getChances();
+
+var texts = {
+    superrare: "A SUPER RARE BRAWLER. Not bad!",
+    epic: "An EPIC BRAWLER! That's rare!",
+    mythic: "You got a MYTHIC BRAWLER! Amazing!",
+    legendary: "The stars aligned to give you a LEGENDARY BRAWLER!",
+    star: "You pulled a STAR POWER! Nice!",
+    gold: "Nothing special here. Just COINS.",
+    rare: "You pulled a RARE BRAWLER!",
+};
+
+var allTexts = [texts.gold, texts.rare, texts.superrare, texts.star, texts.epic, texts.mythic, texts.legendary];
+
+var associates = ["", "rare", "superrare", "star", "epic", "mythic", "legendary"];
+
+var backs = ["coinBack", "rareBack", "superrareBack", "starBack", "epicBack", "mythicBack", "legendaryBack"];
+
+var mults = [-1/30, 1, 2, 0, 3, 4, 5];
+
+var pulls = [];
+
+var number = 1;
+
+var tableAdd = "";
+
+function setLeft(){
+var leftStuff = [["&#8734", "coinBack", "Coins", altchances.gold], [counts.star, "starBack", "Star Power", altchances.star], [counts.rare, "rareBack", "Rare Brawler", altchances.rare], [counts.superrare, "superrareBack", "Super Rare Brawler", altchances.superrare], [counts.epic, "epicBack", "Epic Brawler", altchances.epic], [counts.mythic, "mythicBack", "Mythic Brawler", altchances.mythic], [counts.legendary, "legendaryBack", "Legendary Brawler", altchances.legendary]];
+document.getElementById("boxLeft").innerHTML = "<tr><th>Category</th><th>Remaining</th><th>Chance</th></tr>";
+for(var i = 0; i < leftStuff.length; i ++){
+document.getElementById("boxLeft").innerHTML += "<tr><td class = \'" + leftStuff[i][1] + "\'>" + leftStuff[i][2] + "</td><td>" + leftStuff[i][0] + "</td><td>" + (leftStuff[i][3] * 100).toFixed(4) + "%</td></tr>";
+}
+};
+
+setLeft();
+
+function checkIsValid(a){
+var isValid = false;
+for(var j = 0; j < pool.length; j ++){
+    if(a >= pool[j][0] && a < pool[j][1]){
+	isValid = true;
+    }
+}
+return(isValid);
+};
+
+var gems = 0;
+var tickets = 0;
+var doublers = 0;
+
+function openBox(q){
+var pastNum = number;
+while(number < pastNum + q){
+var randNum = Math.random();
+for(var j = 0; j < pool.length; j ++){
+    if(randNum >= pool[j][0] && randNum < pool[j][1]){
+        var id = pool[j][2];
+        pulls.push(allTexts[pool[j][2]]);
+        tableAdd = "<tr><td>" + number + "</td><td class = \'" + backs[id] + "\'>" + allTexts[id] + "</td>";
+        number ++;
+        var randNum2 = Math.random();
+        if(randNum < 0.03){
+        doublers += 200;
+        tableAdd += "<td class = \'extraBack\'>200 Key Doublers</td>";
+        }
+        if(randNum >= 0.03 && randNum < 0.03 + 0.09){
+        if(randNum2 >= 0.39){
+        gems += 3;
+        tableAdd += "<td class = \'extraBack\'>3 Gems</td>";
+        }
+        else if(randNum2 >= 0.12){
+        gems += 5;
+        tableAdd += "<td class = \'extraBack\'>5 Gems</td>";
+        }
+        else if(randNum2 >= 0.03){
+        gems += 8;
+        tableAdd += "<td class = \'extraBack\'>8 Gems</td>";
+        }
+        else{
+        gems += 12;
+        tableAdd += "<td class = \'extraBack\'>12 Gems</td>";
+        }
+        }
+        else if(randNum >= 0.12 && randNum < 0.37){
+        if(randNum2 >= 2/3){
+        tickets += 3;
+        tableAdd += "<td class = \'extraBack\'>3 Tickets</td>";
+        }
+        else if(randNum2 >= 1/3){
+        tickets += 2;
+        tableAdd += "<td class = \'extraBack\'>2 Tickets</td>";
+        }
+        else{
+        tickets += 1;
+        tableAdd += "<td class = \'extraBack\'>1 Ticket</td>";
+        }
+        }
+        var add = document.getElementById("boxResults").insertRow(0);
+        add.innerHTML = tableAdd + "</tr>";
+        document.getElementById("extraLeft").rows[1].cells[1].innerHTML = gems;
+        document.getElementById("extraLeft").rows[2].cells[1].innerHTML = tickets;
+        document.getElementById("extraLeft").rows[3].cells[1].innerHTML = doublers;
+        if(chances.legendary + mults[id] * 0.0048/100 < 0.01 && chances.legendary + mults[id] * 0.0048/100 > 0){
+        chances.legendary += mults[id] * 0.0048/100;
+        chances.legendary -= mults[id] * 0.0048/100;
+        }
+        switch(associates[id]){
+        case "rare":
+        counts.rare--;
+        break;
+        case "star":
+        counts.star--;
+        break;
+        case "superrare":
+        counts.superrare--;
+        break;
+        case "epic":
+        counts.epic--;
+        break;
+        case "mythic":
+        counts.mythic--;
+        break;
+        case "legendary":
+        counts.legendary--;
+        break;
+        }
+        getChances();
+        break;
+    }
+}
+setLeft();
+}
+};
+</script>
+</html> 

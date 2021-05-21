@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=1000">
+<script src = "js/fastclick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<title>See your chances</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src = 'js/jquery-3.3.1.min.js'></script>
+<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id = 'homehead' style = "height: 250px !important;">
+<h1 id = 'webtitle'>Brawl Box Calculator</h1>
+<a href = "https://brawlcalc.com/findgroup.php"><div width = 100% height = "50px" style = "background: grey;"><h3 style = "width: 800px; font-size: 20px; height: 50px !important; line-height: 50px;" style = "color: blue;">Want to try out a new beta team-finding feature on brawlcalc? Click here!</h3></div></a>
+</div>
+<div id = 'statsback'>
+<div id = 'allstats'>
+<button type = "button" onclick = "toSim()" style = "height: 80px;">Brawl Box Simulator</button>
+<div align = "center" style = "margin-top: 10px; margin-bottom: 10px;">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Leaderboard1 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-3950483385091916"
+     data-ad-slot="8200650693"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<h1 style = "margin-top: 10px;">Find Specific Values</h1>
+<div class = "font20">
+<div align = 'center' class = 'statinputResult'>
+        	<p>Find my percentages from&nbsp</p><input type = 'number' id = 'boxInput' value = '1' placeholder = 'eg. 10'><p>&nbspdrops!</p>
+                <br>
+                <p>(Consider a normal box as one drop, a big box as three drops, and a mega box as ten drops.)
+</div>
+        <div align = 'center' class = 'statinputResult'>
+        	<p>Find the boxes needed for a&nbsp</p><input type = 'number' id = 'prcntInput' value = '50' placeholder = 'eg. 50'><p>% chance!</p>
+        </div>
+    </div>
+        <table id = "tableResults" class = "resultTableThing">
+        <tr><th>Category</th><th>Percentage from Boxes</th><th>Boxes for percentage</th></tr>
+        </table>
+<br>
+<table id = "extraResults" class = "resultTableThing">
+        <tr><th>Gems</th><th>Tickets</th><th>Key Doublers</th></tr>
+        <tr class = "extraBack" id = "extraResultsRow"><td>0</td><td>0</td><td>0</td></tr>
+        </table>
+<h3 id = "allStuff">You cannot receive any more rewards! Try unselecting brawlers to see what your stats will be when new brawlers are released.</h3>
+<div id = "graphDiv">
+<h1>
+       Check The Results To Compare
+    </h1>
+<div id = "graphChecks">
+</div>
+<canvas id = "graphCanvas"></canvas>
+</div>
+</div>
+<div id = "howLink">
+    <a id = "howLinkLink" href = "\explain.html">How do I find this stuff?</a>
+</div>
+<p id = 'resultdisclaim'>*This is merely fan content, and results may not be completely accurate. This calculator is meant to serve only as a provider of fairly accurate approximations. Legendary odds are calculated assuming that no other brawlers are unlocked.<br>Have a suggestion to improve the site? Make it on <a id = "github" href = "https://github.com/LlamaTrauma/brawlcalc">GitHub!</a></p>
+</div>
+<footer class = 'foot'>
+<div id = 'texthold'>
+<p id = 'disclaim'>
+    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell&#39s Fan Content Policy: www.supercell.com/fan-content-policy.
+</p>
+</div>
+</footer>
+<script>
+var attachFastClick = Origami.fastclick;
+attachFastClick(document.body);
+var info = JSON.parse(localStorage.getItem('info'));
+if(info.chance !== 0.135792){
+    $("#boxButton").addClass("hidden");
+}
+if(!info.needLegendary && !info.needEpic && !info.needMythic && !info.needSuperRare && !info.needRare && info.stars === 0){
+document.getElementById("graphDiv").style.display = "none";
+document.getElementById("tableResults").style.display = "none";
+}
+else{
+document.getElementById("allStuff").style.display = "none";
+}
+
+var chances = {
+    superrare: 0.012096,
+    epic: 0.005472,
+    mythic: 0.002496,
+    legendary: info.chance / 100,
+    star: 0.01,
+    gold: .942,
+    rare: 0,
+}
+
+var graphs = {
+legendary: [],
+mythic: [],
+epic: [],
+superrare: [],
+rare: [],
+star: [],
+};
+
+chances.legendary *= (0.942 / (info.points/100));
+
+chances.rare = 1 - chances.superrare - chances.epic - chances.legendary - chances.mythic - chances.star - chances.gold;
+
+var has  = 0;
+var hasnt = 0;
+hasnt += chances.gold;
+
+function putRight(a, b){
+if(a){hasnt += b;}else{has += b;}
+};
+
+putRight(info.needLegendary, chances.legendary);
+putRight(info.needMythic, chances.mythic);
+putRight(info.needEpic, chances.epic);
+putRight(info.needSuperRare, chances.superrare);
+putRight(info.needRare, chances.rare);
+putRight(info.stars > 0, chances.star);
+
+function toReal(a){
+if(hasnt === 0){
+return(a);
+}
+//return(a * ((chances.mythic + chances.epic + chances.star + chances.gold + chances.superrare + chances.rare) / hasnt));
+//return(a * (1 / hasnt));
+return(a + (a / hasnt) * has);
+}
+
+function getPercent(a, b, c){
+    if(c === 'legendary'){
+    var chnc = 1;
+    var cc = a;
+    for(i = 1; i <= b; i ++){
+    chnc *= (1 - toReal(cc));
+    cc += (0.0014-0.0013)/200;
+    }
+    return(100 * (1 - chnc));
+    }
+    return(100 * (1 - Math.pow(1 - toReal(a), b)));
+}
+
+function getBoxes(a, b, c){
+    var values = [0, 0, 0];
+    var prcnt = 1;
+    var aa = a;
+    var boxes = 0;
+    var prcntcap = (c === "no" ? 0.01 : 0.25)
+    while(prcnt > prcntcap){
+        prcnt *= (1 - toReal(aa));
+        boxes ++;
+        if(values[0] === 0 && prcnt <= 0.75){
+            values[0] = boxes;
+        }
+        if(values[1] === 0 && prcnt <= 0.5){
+            values[1] = boxes;
+        }
+        if(values[2] === 0 && prcnt <= 0.25){
+            values[2] = boxes;
+        }
+        if(b === 'legendary'){
+        aa += (0.0014-0.0013)/200;
+        }
+    }
+    return(values);
+}
+
+function getBoxesForPercent(a, b){
+  var takes = 0;
+  var prcnt = 1;
+  var resulty = [0];
+  var indx = 1;
+  while(prcnt > 0.01){
+    prcnt *= (1 - a);
+    takes ++;
+    if(b){
+    a += (0.0014-0.0013)/200;
+    }
+    for(var i = indx; i <= Math.floor((1 - prcnt) * 100); i ++){
+console.log(i);
+      resulty[i] = takes;  
+    }
+    indx = Math.floor((1 - prcnt) * 100) + 1;
+  }
+console.log(resulty);
+  return(resulty);
+};
+
+var expected = {
+legendary:0,
+mythic:0,
+epic:0,
+superrare:0,
+rare:0,
+star:0
+};
+
+function choose(a, b){
+var row = a;
+var actrow = [];
+actrow[0] = 1;
+for(var i = 1; i <= a; i ++){
+actrow[i] = (actrow[i - 1] * a) / i;
+}
+return(actrow);
+};
+
+//console.log(choose(0, 1) + "   " + choose(1, 1) + "   " + choose(2, 1) + "   " + choose(3, 1) + "    " + choose(4, 1));
+
+function getExpected(){
+    function getExpValue(a, b, c){
+c = 1;
+return(choose(b, c) * Math.pow(a, c) * Math.pow(1 - a, b - c));
+    };
+};
+
+graphs.legendary = getBoxesForPercent(chances.legendary, true);
+graphs.mythic = getBoxesForPercent(chances.mythic, false);
+graphs.epic = getBoxesForPercent(chances.epic, false);
+graphs.superrare = getBoxesForPercent(chances.superrare, false);
+graphs.rare = getBoxesForPercent(chances.rare, false);
+graphs.star = getBoxesForPercent(chances.star, false);
+
+var chosen = {mythic:{g: graphs.mythic, c: "rgb(255, 0, 0)", o:false}, legendary:{g:graphs.legendary, c:"rgb(216, 216, 0)", o:false}, star:{g:graphs.star, c:"rgb(127, 127, 127)", o:false}, rare:{g:graphs.rare, c:"rgb(0, 255, 0)", o:false}, superrare:{g:graphs.superrare, c:"rgb(0, 0, 255)", o:false}, epic:{g:graphs.epic, c:"rgb(128, 0, 128)", o:false}};
+
+var chosens = [chosen.mythic, chosen.star, chosen.superrare, chosen.legendary, chosen.rare, chosen.epic];
+
+    function configGraph(a, b){
+    return("<div class = 'graphCheck " + a + "Back'><input type='checkbox' id='" + a + "Check' checked></input><br><p>" + b + "</p></div>");
+    };
+    function configTable(a, b){
+    return("<tr class = 'tableResultRow " + a + "Back' id = '" + a + "Table'><td>" + b + "</td><td></td><td></td></tr>");
+    };
+    var configs = 0;
+    if(info.needLegendary){
+    $("#graphChecks").append(configGraph("legendary", "Legendary"));
+    $("#tableResults").append(configTable("legendary", "Legendary"));
+    configs ++;
+    }
+    if(info.needMythic){
+    $("#graphChecks").append(configGraph("mythic", "Mythic"));
+    $("#tableResults").append(configTable("mythic", "Mythic"));
+    configs ++;
+    }
+    if(info.needEpic){
+    $("#graphChecks").append(configGraph("epic", "Epic"));
+    $("#tableResults").append(configTable("epic", "Epic"));
+    configs ++;
+    }
+    if(info.needSuperRare){
+    $("#graphChecks").append(configGraph("superrare", "Super Rare"));
+    $("#tableResults").append(configTable("superrare", "Super Rare"));
+    configs ++;
+    }
+    if(info.needRare){
+    $("#graphChecks").append(configGraph("rare", "Rare"));
+    $("#tableResults").append(configTable("rare", "Rare"));
+    configs ++;
+    }
+    if(info.stars > 0){
+    $("#graphChecks").append(configGraph("star", "Star power"));
+    $("#tableResults").append(configTable("star", "Star power"));
+    configs ++;
+    }
+    $(".graphCheck").css("width", "150px");
+    $(".graphCheck").css("height", "80px");
+    $("#graphChecks").css("height", 80 * (Math.ceil(configs / 3)) + (configs > 0 ? 0 : 0) + "px");
+    document.body.style.background = "rgb(0, 0, 127)";
+    </script>
+    <script>
+var boxInput = parseInt(document.getElementById('boxInput').value);
+var prcntInput = parseInt(document.getElementById('prcntInput').value);
+function handleChecked(){
+boxInput = parseInt(document.getElementById('boxInput').value);
+prcntInput = parseInt(document.getElementById('prcntInput').value);
+var otherChosen = [];
+for(var i = 0; i < chosens.length; i ++){
+if(chosens[i].o){
+otherChosen.push(chosens[i].g[chosens[i].g.length - 1]);
+}
+}
+var maxNum = otherChosen.length > 0 ? Math.max(...otherChosen) : 100;
+if(!isNaN(boxInput)){
+if(boxInput < 0){
+boxInput = 0;
+document.getElementById('boxInput').value = 0;
+}
+if(boxInput > maxNum){
+boxInput = maxNum;
+document.getElementById('boxInput').value = maxNum;
+}
+document.getElementById("tableResults").rows[0].cells[1].innerHTML = "Percantage from " + boxInput + " drop" + (boxInput === 1 ? "" : "s");
+}
+else{
+document.getElementById("tableResults").rows[0].cells[1].innerHTML = "Bad Information";
+}
+if(!isNaN(prcntInput)){
+if(prcntInput < 0){
+prcntInput = 0;
+document.getElementById('prcntInput').value = 0;
+}
+if(prcntInput > 99){
+prcntInput = 99;
+document.getElementById('prcntInput').value = 99;
+}
+document.getElementById("tableResults").rows[0].cells[2].innerHTML = "Drops for " + prcntInput + "% chance";
+}
+else{
+document.getElementById("tableResults").rows[0].cells[2].innerHTML = "Bad Information";
+}
+function configTableRow(a, b, c){
+if(!isNaN(boxInput)){
+document.getElementById(a + "Table").cells[1].innerHTML = Math.round(getPercent(b, boxInput, 'legendary') * 10000) / 10000 + "%";
+}
+else{
+document.getElementById(a + "Table").cells[1].innerHTML = "Bad Information";
+}
+if(!isNaN(prcntInput)){
+document.getElementById(a + "Table").cells[2].innerHTML = c[prcntInput];
+}
+else{
+document.getElementById(a + "Table").cells[2].innerHTML = "Bad Information";
+}
+};
+if(info.needLegendary){
+    configTableRow('legendary', chances.legendary, graphs.legendary);
+    }
+    if(info.needMythic){
+    configTableRow('mythic', chances.mythic, graphs.mythic);
+    }
+    if(info.needEpic){
+    configTableRow('epic', chances.epic, graphs.epic);
+    }
+    if(info.needSuperRare){
+    configTableRow('superrare', chances.superrare, graphs.superrare);
+    }
+    if(info.needRare){
+    configTableRow('rare', chances.rare, graphs.rare);
+    }
+    if(info.stars > 0){
+    configTableRow('star', chances.star, graphs.star);
+    }
+if(!isNaN(boxInput)){
+document.getElementById("extraResultsRow").cells[0].innerHTML = Math.round(boxInput * 0.3834 * 1000) / 1000;
+document.getElementById("extraResultsRow").cells[1].innerHTML = Math.round(boxInput / 2 * 10) / 10;
+document.getElementById("extraResultsRow").cells[2].innerHTML = Math.round(boxInput * 200 * 0.03 * 100) / 100;
+}
+else{
+console.log(true);
+document.getElementById("extraResultsRow").cells[0].innerHTML = "Bad Information";
+document.getElementById("extraResultsRow").cells[1].innerHTML = "Bad Information";
+document.getElementById("extraResultsRow").cells[2].innerHTML = "Bad Information";
+}
+};
+setInterval(handleChecked, 1000/60);
+var canv = document.getElementById("graphCanvas");
+canv.height = 445;
+canv.width = 500;
+var canvas = document.getElementById("graphCanvas");
+var ctx = canvas.getContext("2d");
+console.log(ctx);
+function drawGraph(){
+if(info.needMythic){
+chosen.mythic.o = document.getElementById('mythicCheck').checked;
+}
+if(info.needLegendary){
+chosen.legendary.o = document.getElementById('legendaryCheck').checked;
+}
+if(info.needEpic){
+chosen.epic.o = document.getElementById('epicCheck').checked;
+}
+if(info.needSuperRare){
+chosen.superrare.o = document.getElementById('superrareCheck').checked;
+}
+if(info.needRare){
+chosen.rare.o = document.getElementById('rareCheck').checked;
+}
+if(info.stars > 0){
+chosen.star.o = document.getElementById('starCheck').checked;
+}
+//For lazy editing
+var off = {x:25, y:-80};
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = "#FFFFFF";
+ctx.lineWidth = "3";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+var prcntSpace = 350;
+var boxSpace = 360;
+ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+ctx.fillRect(45 + off.x, 95 + off.y + 360 - prcntSpace - 5, 5, prcntSpace + 5);
+ctx.fillRect(50 + off.x, 450 + off.y, boxSpace, 5);
+ctx.font = "12px arial";
+ctx.textAlign = "center";
+ctx.textBaseline = 'middle';
+for(var i = 0; i <= 100; i += 10){
+if(i === 100){
+i = 99;
+}
+ctx.fillText(i, 25 + off.x, 450 - (i / 100) * prcntSpace + off.y + 3);
+}
+ctx.save();
+ctx.translate(25, 95 + off.y + 360 - prcntSpace - 10 + (prcntSpace + 10) / 2);
+ctx.rotate(-Math.PI / 2);
+ctx.fillText("(%Chance of reward from category)", 0, 0);
+ctx.restore(); 
+var otherChosen = [];
+for(var i = 0; i < chosens.length; i ++){
+if(chosens[i].o){
+otherChosen.push(chosens[i].g[chosens[i].g.length - 1]);
+}
+}
+var maxNum = otherChosen.length > 0 ? Math.max(...otherChosen) : 100;
+var boxPlus =  maxNum / 9;
+//I add 0.5 to deal with decimal inaccuracies
+for(var i = 0; i <= maxNum + 0.5; i += boxPlus){
+ctx.save();
+ctx.translate(45 + i * boxSpace / maxNum + off.x, 475 + off.y);
+ctx.rotate(-Math.PI * 3 / 2);
+ctx.fillText(Math.round(i), 0, 0);
+ctx.restore();
+}
+ctx.fillText("(Brawl boxes)", 45 + boxSpace / 2 + off.x, 505 + off.y);
+for(var i = 0; i < chosens.length; i ++){
+if(chosens[i].o){
+ctx.beginPath();
+ctx.strokeStyle = chosens[i].c;
+ctx.moveTo(50 + off.x, 450 + off.y);
+for(var j = 1; j < chosens[i].g.length; j ++){
+ctx.lineTo(off.x + 50 + (chosens[i].g[j] / maxNum) * boxSpace, 450 - (j / 99) * prcntSpace + off.y);
+}
+ctx.stroke();
+}
+}
+ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+ctx.fillRect(45 + off.x + ((boxInput > maxNum ? maxNum : boxInput) / maxNum) * boxSpace, 95 + off.y + 360 - prcntSpace - 5, 5, prcntSpace + 5);
+ctx.fillRect(50 + off.x - 5, 450 + off.y - (prcntInput / 99) * prcntSpace, boxSpace + 5, 5);
+};
+setInterval(drawGraph, 1000/60);
+function toSim(){
+    window.location.href = "boxSim.html";
+};
+</script>
+</body>
+</html> 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=1000">
+<meta name="description" content="Enter your information to recieve statistics about Brawl Stars brawl box odds!"/>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<title>How do I perform my calculations?</title>
+<script src = 'js/jquery-3.3.1.min.js'></script>
+</head>
+<body bgcolor = '#676767'>
+<div id = 'homehead'>
+<h1 id = 'webtitle'>Brawl Box Calculator</h1>
+</div>
+<div id = 'selectcont'>
+<div id = 'explainStuff'>TL;DR: To calculate your chances of receiving a reward from a category, I use 1 - (1 - your odds of receiving a reward in that category) ^ boxes simulated, and factor in the changing in-game luck factor when dealing with legendaries.<br><br>To calculate your chances of receiving brawlers, I use the wonders of statistics. Obviously, there is no number of brawl boxes that you can open to be guaranteed a brawler. Your chance will approach 100%, but never reach it. So I find the benchmark odds of 25%, 50%, and 75%. And ironically, to find the odds of receiving a brawler, I have to calculate the odds of <b>not</b> receiving a brawler. To start, I convert all chances into their decimal counterparts (so 100% would equal 1). Then, I basically simulate opening a box a bunch of times. I start with a chance of 1 to not receive a reward, and then for every brawl box simulated multiply that chance by 1 minus the chance of receiving a reward from that category, or in other words, your chance of not receiving a reward of that category. After doing this <em>x</em> times, I can subtract the value I have from one to find your odds of receiving that brawler from <em>x</em> boxes. For legendary brawlers, I have to factor in the luck value. As I have no set data on how the luck factor changes (<b>please, Supercell</b>), I'm forced to take a ballpark estimate and assume that it changes your chance of receiving a legendary brawler by 0.01% every 200 boxes, or 0.00005% per box. To account for this, I merely increase your chance of receiving a legendary brawler by the change in the luck factor for a single box after every time I simulate opening a box.<br><br>But there's more! According to the details Supercell gives, having all rewards of a category increases your chances of receiving rewards from all other categories. Again, I'm forced to take a shot in the dark here and assume how this 'extra percentage' is distributed, but I think I calculate it correctly. Say you only need two legendary brawlers and some power points. If your legendary chance were a generic 0.1%, these percentages would only add up to 94.3%, leaving an extra 5.7% that must be divvied up between these two categories. I do this based on the percentage of the total percent that each category takes up. For example, your odds of a legendary brawler would take up 0.1/94.3 = 0.00106 / 1 of the sum of these 'valid percentages'. Therefore, I would add (5.7 * 0.00106)% to your legendary chance, meaning the actual chance would be around 0.10604%. It's a small boost, but it's definitely not negligible. I then perform the same calculations for all other valid reward categories.<br><br>Have questions or spelling errors to bring to my attention? I don't have an email associated with this website right now, but feel free to tag u/Llama_Trauma7 on Reddit.</p>
+</div>
+</body>
+<footer class = 'foot'>
+<div id = 'texthold'>
+<p id = 'disclaim'>
+    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see Supercell&#39s Fan Content Policy: www.supercell.com/fan-content-policy.
+</p>
+</div>
+</footer>
+</html> 
