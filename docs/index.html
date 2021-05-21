@@ -199,7 +199,7 @@ function getinfo(){
     info.chance = parseFloat(document.getElementById("leggie").value, 10);
     info.points = parseFloat(document.getElementById("point").value, 10);
     info.stars = parseFloat(document.getElementById("stars").value, 10);
-    if(isNaN(info.boxes) || isNaN(info.chance) || isNaN(info.points) || isNaN(info.stars) || info.boxes < 0 || info.chance < 0 || info.chance > 1 || info.stars < 0){
+    if(isNaN(info.boxes) || isNaN(info.chance) || isNaN(info.points) || isNaN(info.stars) || info.boxes < 0 || info.chance < 0 || info.stars < 0){
     console.log(true);
     alert("Whoops! Double-check your inputs!");
     return;
